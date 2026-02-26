@@ -6,13 +6,11 @@ const { Pool } = pg;
 
 // Configuração do Banco de Dados (Supabase)
 const pool = new Pool({
-  // Se existir a variável DATABASE_URL (na Vercel), usa ela. 
-  // Caso contrário, tenta usar o seu localhost para desenvolvimento.
-  connectionString: process.env.DATABASE_URL || "postgres://postgres:shottz@localhost:5432/bd_almox_esc",
-  
-  // O Supabase EXIGE SSL para conexões externas. 
-  // Essa linha ativa o SSL apenas quando estiver rodando na nuvem (Vercel).
-  ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    // Essa linha resolve o erro "self-signed certificate"
+    rejectUnauthorized: false 
+  }
 });
 
 const app = express();
