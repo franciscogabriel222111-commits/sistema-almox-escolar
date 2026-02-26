@@ -8,8 +8,7 @@ const { Pool } = pg;
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
-    // Essa linha resolve o erro "self-signed certificate"
-    rejectUnauthorized: false 
+    rejectUnauthorized: false
   }
 });
 
